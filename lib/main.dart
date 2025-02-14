@@ -3,9 +3,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:ukk_2025/login.dart';
 
 void main(async) {
+  WidgetsFlutterBinding();
   Supabase.initialize(
     url: 'https://tqczrpnnlyinoxxenzkt.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRxY3pycG5ubHlpbm94eGVuemt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk0MTAxOTksImV4cCI6MjA1NDk4NjE5OX0.ZJQ6wXx_BGrMleqJNZpiK13sdcAHOnqCEu76oQBJ4ho');
+
   runApp(const MyApp());
 }
 
@@ -35,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[200],
+        backgroundColor: Colors.purple[100],
         leading: IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()),);
@@ -43,16 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
           icon: Icon(Icons.login_outlined)),
       ),
       body: Container(
-        color: Colors.blueGrey[200],
-        child: const Center(
-          child: Text('Selamat Datang Di toko kami \n silahkan klik tombol login di kiri atas', 
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+        color: Colors.purple[100],
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [ Center(
+            widthFactor: 50,
+            heightFactor: 9,
+            child: Text('Selamat Datang Di toko kami \n silahkan klik tombol login di kiri atas',
+             style: TextStyle(
+             fontSize: 18,
+             fontWeight: FontWeight.bold,
+             color: Colors.black,
+           ),
           textAlign: TextAlign.center,
-        ),
+          )
+         ) 
+        ],
       ),
     ), 
   ); 
