@@ -14,31 +14,24 @@ void main() async {
 }
 
 class Login extends StatefulWidget {
-  const Login ({super.key});
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  final _usernameprdk = TextEditingController();
-  final _passwordprdk = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final SupabaseClient supabase = Supabase.instance.client;
   bool _isPasswordVisible = false;
   
   Future<void> _Login() async {
-    final username = _usernameprdk.text;
-    final password = _passwordprdk.text;
-
-    if (username.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Harap isi semua field')),
-      );
-      return;
-    }
-
+      final String username = usernameController.text.trim();
+      final String password = passwordController.text.trim();
+      
     try{
       final response = await supabase 
       .from('user')
-      .select('username, password')
+      .select('id, username, password')
       .eq('username', username)
       .single();
 
@@ -46,14 +39,14 @@ class _LoginState extends State<Login> {
         ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text('Login Berhasil'),)
         );
-        if (response['role'] == 'admin')  {
+        if (response['user'] == 'user')  {
           Navigator.pushReplacement(
             context, 
             MaterialPageRoute(builder: (context)=> Beranda()),
           );
         } else {
-        ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Username atau Password Salah')),
+          Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context)=> Beranda(),),
         );
       }
     } else {
@@ -71,10 +64,12 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: Colors.purple[100],
       body: Container(
+        width: double.infinity,
+        color: Colors.purple[100],
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: 20,),
+            const SizedBox(height: 80,),
             const Padding(
               padding: EdgeInsets.all(15.0),
               child: TextField(
