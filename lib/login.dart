@@ -14,6 +14,8 @@ void main() async {
 }
 
 class Login extends StatefulWidget {
+  const Login ({super.key});
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -24,82 +26,93 @@ class _LoginState extends State<Login> {
   final SupabaseClient supabase = Supabase.instance.client;
   bool _isPasswordVisible = false;
   
-  Future<void> _Login() async {
+  Future<void> _login() async {
       final String username = usernameController.text.trim();
       final String password = passwordController.text.trim();
       
+      if (username.isEmpty || password.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Harap isi semua field')),
+        );
+        return;
+      }
     try{
-      final response = await supabase 
+      final List<dynamic> response = await supabase
       .from('user')
       .select('id, username, password')
-      .eq('username', username)
-      .single();
+      .eq('username', username);
 
-      if (response != null && response['password'] == password) {
-        ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Login Berhasil'),)
+      if (response.isNotEmpty) {
+        final user = response.first;
+        if (user['password'] == password) {
+          ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('Login Berhasil')),
         );
-        if (response['user'] == 'user')  {
-          Navigator.pushReplacement(
-            context, 
-            MaterialPageRoute(builder: (context)=> Beranda()),
-          );
+        Navigator.pushReplacement(
+          context, 
+          MaterialPageRoute(builder: (context)=>Beranda()),
+        );
         } else {
-          Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context)=> Beranda(),),
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Password Salah')),
+          );
+        }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('username tidak dapat ditemukan')),
         );
       }
-    } else {
-      ScaffoldMessenger.of(context)
-      .showSnackBar(const SnackBar(content: Text('Harap isi semua field'),)
-      );
-    }
-  } catch (e) {
+    } catch (e) {
     ScaffoldMessenger.of(context)
-    .showSnackBar(const SnackBar(content: Text('masih ada kesalahan'),));
+    .showSnackBar(const SnackBar(content: Text('Periksa kembali username dan Passwordnya')),
+    );
   }
-  }
+}
   @override
-  Widget build(BuildContext context) {
+  Widget build (BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.purple[100],
-      body: Container(
-        width: double.infinity,
-        color: Colors.purple[100],
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: 80,),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: TextField(
-                decoration: InputDecoration(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
                   hintText: "Username",
                   prefixIcon: Icon(Icons.person),
-                  hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                  hintStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: TextField(
-                obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Password",
-                prefixIcon: Icon(Icons.lock),
-                hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                border: OutlineInputBorder(),
+              const SizedBox(height: 15),
+              TextField(
+                controller: passwordController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
+                  hintText: "password",
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                    ),
+                    hintStyle:  const TextStyle(color: Colors.black),
+                    border: const OutlineInputBorder(),
+                ),
               ),
-            ),
-           ),
-           const SizedBox(height: 20),
-           ElevatedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Beranda()),);
-            }, 
-            child: const Text('Login')),
-          ],
+              const SizedBox(height: 20,),
+              ElevatedButton(
+                onPressed: _login, 
+                child: const Text('Login'),
+              )
+            ],
+          ),
         ),
       ),
     );

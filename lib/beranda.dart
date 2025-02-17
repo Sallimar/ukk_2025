@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:ukk_2025/Pelanggan/index.dart';
+import 'package:ukk_2025/Penjualan/index.dart';
 import 'package:ukk_2025/Produk/index.dart';
 import 'package:ukk_2025/User/indexuser.dart';
 import 'package:ukk_2025/login.dart';
@@ -12,27 +14,22 @@ class Beranda extends StatefulWidget {
   _BerandaState createState() => _BerandaState();
 }
 
-class _BerandaState extends State<Beranda>with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _BerandaState extends State<Beranda> {
+  int _selectedIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 6, vsync: this);
-  }
+  final List<Widget> _pages = [
+    ProdukIndex(),
+    Pelangganview(),
+    PenjualanTab(),
+    Center(child: Text("Detail Penjualan Page")),
+  ];
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  void _changeTab(int index) {
+  void _onItemTapped(int index) {
     setState(() {
-      _tabController.index=index;
-      Navigator.pop(context);
+      _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,37 +41,17 @@ class _BerandaState extends State<Beranda>with SingleTickerProviderStateMixin {
         child: ListView(
           children: [
             const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.purple),
               child: Center(
                 child: Text('Beranda'),
               ),
               ),
             ListTile(
-              leading: const Icon(Icons.category),
-                title: const Text('Produk'),
-                onTap: () => _changeTab (0),
-            ),
-            ListTile(
-              leading: const Icon(Icons.people),
-                title: const Text('Pelanggan'),
-                onTap: () => _changeTab (1),
-            ),
-           ListTile(
-              leading: const Icon(Icons.receipt_long),
-                title: const Text('Penjualan'),
-                onTap: () => _changeTab (2),
-            ),
-            ListTile(
-              leading: const Icon(Icons.assignment),
-                title: const Text('Detail Penjualan'),
-                onTap: () => _changeTab (3),
-            ),
-            const Divider(),
-            ListTile(
               leading: const Icon(Icons.account_box),
               title: Text('User'),
               onTap: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context)=>UserTab()),);
+                  context, MaterialPageRoute(builder: (context)=>UserIndex()),);
               },
             ),
             const Divider(),
@@ -83,11 +60,26 @@ class _BerandaState extends State<Beranda>with SingleTickerProviderStateMixin {
                 title: const Text('Logout'),
                 onTap: () {
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context)=>MyHomePage()),);
+                    context, MaterialPageRoute(builder: (context)=>MyHomePage()),
+                  );
                 },
             ),
           ],
         ),
+      ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.category), label: "produk"),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: "Pelanggan"),
+          BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: "Penjualan"),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: "Detail"),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.purple[700],
+        unselectedItemColor: Colors.grey,
+        onTap: _onItemTapped,
       ),
     );
   }

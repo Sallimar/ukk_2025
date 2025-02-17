@@ -1,55 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:ukk_2025/Produk/insert.dart';
-import 'package:ukk_2025/main.dart';
+import 'package:ukk_2025/Produk/update.dart';
 
-class ProdukTab extends StatefulWidget {
-  const ProdukTab ({super.key});
+class ProdukIndex extends StatefulWidget {
 
   @override 
-  _ProdukTabState createState() => _ProdukTabState();
+  _ProdukIndexState createState() => _ProdukIndexState();
 }
 
-class _ProdukTabState extends State<ProdukTab> {
+class _ProdukIndexState extends State<ProdukIndex> {
+  final SupabaseClient supabase = Supabase.instance.client;
   List<Map<String,dynamic>> produk = [];
-  bool isLoading = true;
+  String _searchQuery = "";
 
   @override
   void initState() {
     super.initState();
     fetchProduk();
 
-    Supabase.instance.client
-    .from('produk')
-    .stream(primaryKey: ['ProdukID'])
-    .eq('ProdukID', 'produk')
-    .listen((List<Map<String, dynamic>> data) {
-      fetchProduk();
-    });
   }
 
   Future<void> fetchProduk() async {
-    setState(() {
-      isLoading = true;
-    });
     try {
-      final response = await Supabase.instance.client
-      .from('produk')
-      .select();
+      final response = await Supabase.from('produk').select();
       setState(() {
         produk = List<Map<String, dynamic>>.from(response);
-        isLoading = false;
       });
     } catch (e) {
       print('Error fetching produk: $e');
-      setState(() {
-        isLoading = false;
-      });
+      
     }
   }
 
-  Future<void> deleteProduk(int produkID) async {
+  Future<void> deleteProduk(int id) async {
     try {
       await Supabase.instance.client
       .from('produk')

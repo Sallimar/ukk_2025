@@ -55,8 +55,7 @@ class _addprodukState extends State<addproduk> {
         if (mounted) {
           Navigator.pushReplacement(
             context, 
-            MaterialPageRoute(builder: (context)=>ProdukTab()),
-          );
+            MaterialPageRoute(builder: (context)=>ProdukIndex()));
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
