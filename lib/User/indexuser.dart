@@ -59,12 +59,19 @@ class _UserIndexState extends State<UserIndex> {
                 ),
                 IconButton(
                   onPressed: () => deleteUser(userItem['id']), 
-                  icon: Icon(Icons.delete))
+                  icon: Icon(Icons.delete)
+                )
               ],
             ),
           );
-        }
+        },
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context)=> Insertuser(refreshUsers: fetchUsers)),
+          )),
     );
   }
 }

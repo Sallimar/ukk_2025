@@ -19,7 +19,7 @@ class _BerandaState extends State<Beranda> {
 
   final List<Widget> _pages = [
     ProdukIndex(),
-    Pelangganview(),
+    PelangganIndex(),
     PenjualanTab(),
     Center(child: Text("Detail Penjualan Page")),
   ];
