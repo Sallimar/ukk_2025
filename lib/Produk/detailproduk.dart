@@ -79,15 +79,6 @@ class _DetailProdukState extends State<DetailProduk> {
             Text("Harga: Rp ${widget.produk['Harga']}",style: TextStyle(fontSize: 18)),
             Text("Stok: ${widget.produk['Stok']}",style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
-            TextField(
-              controller: jumlahController,
-              decoration: InputDecoration(
-                labelText: "Jumlah Beli",
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -97,7 +88,7 @@ class _DetailProdukState extends State<DetailProduk> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> PenjualanTab()),);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> PenjualanIndex()),);
                   }, 
                   child: Text("Pesan"),
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.green),

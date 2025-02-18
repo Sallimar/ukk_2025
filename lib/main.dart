@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple[100],
+        backgroundColor: Color.fromARGB(255, 134, 228, 249),
         leading: IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()),);
@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
           icon: Icon(Icons.login_outlined)),
       ),
       body: Container(
-        color: Colors.purple[100],
+        color: const Color.fromARGB(255, 134, 228, 249),
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [ Center(

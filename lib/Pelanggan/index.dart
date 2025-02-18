@@ -44,77 +44,69 @@ class _PelangganIndexState extends State<PelangganIndex> {
     await supabase.from('pelanggan').delete().eq('PelangganID', id);
     fetchPelanggan();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Daftar Pelanggan')),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                labelText: 'Cari Pelanggan...',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
-              onChanged: filterPelanggan,
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Color.fromARGB(255, 146, 212, 248),
+    appBar: AppBar(title: Text('Daftar Pelanggan'),
+    backgroundColor: Color.fromARGB(255, 146, 212, 248),
+    ),
+    body: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: searchController,
+            decoration: InputDecoration(
+              labelText: 'Cari Pelanggan',
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.search),
             ),
+            onChanged: filterPelanggan,
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredPelanggan.length,
-              itemBuilder: (context, index) {
-                final item = filteredPelanggan[index];
-                return Card(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: ListTile(
-                    title: Text(item['NamaProduk']),
-                    subtitle: Text('Harga: ${item['Harga']} | Stok: ${item['Stok']}'),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context)=> UpdateProduk(
-                              produk: item, 
-                              refreshProduk: fetchProduk,
-                              )
-                            )
-                          ).then((_) => fetchProduk()),
-                          icon: Icon(Icons.edit)
-                        ),
-                        IconButton( 
-                        icon: Icon(Icons.delete),
-                        onPressed: () => deleteProduk(item['ProdukID']),
-                        )
-                      ],
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: filteredPelanggan.length,
+            itemBuilder: (context, index) {
+              final item = filteredPelanggan[index];
+              return ListTile(
+                title: Text(item['NamaPelanggan']),
+                subtitle: Text('Alamat: ${item['Alamat']} | Telepon: ${item['NomorTelepon']}'),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.edit, color: Colors.blueAccent),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context)=> UpdatePelanggan(
+                          pelanggan: item, 
+                          refreshPelanggan: fetchPelanggan,
+                      )
+                      )
+                      ),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context)=> DetailProduk(produk: item)),);
-                    },
+                    IconButton(
+                      icon: Icon(Icons.delete, color: Colors.redAccent),
+                      onPressed: () => deletePelanggan(item['PelangganID']),
+                    )
+                   ],
                   ),
-                );
-              }
-            )
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context, 
-            MaterialPageRoute(builder: (context)=>addproduk()),
-          ).then((_)=> fetchProduk());
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
+                 );
+                }
+               )
+              )
+             ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add, color: Colors.lightBlue),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context)=> InsertPelanggan(refreshPelanggan: fetchPelanggan),
+             ),
+            ),
+           ),
+           );
+          }
+         }

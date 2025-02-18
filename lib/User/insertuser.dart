@@ -38,7 +38,10 @@ class _insertUserState extends State<Insertuser> {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Tambah User')),
+      backgroundColor: Color.fromARGB(255, 202, 189, 241),
+      appBar: AppBar(title: Text('Tambah User'),
+      backgroundColor: Color.fromARGB(255, 202, 189, 241),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

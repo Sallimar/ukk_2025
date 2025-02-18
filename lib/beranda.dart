@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:ukk_2025/DetailPenjualan/detailpenjualan.dart';
 import 'package:ukk_2025/Pelanggan/index.dart';
 import 'package:ukk_2025/Penjualan/index.dart';
 import 'package:ukk_2025/Produk/index.dart';
@@ -20,8 +21,8 @@ class _BerandaState extends State<Beranda> {
   final List<Widget> _pages = [
     ProdukIndex(),
     PelangganIndex(),
-    PenjualanTab(),
-    Center(child: Text("Detail Penjualan Page")),
+    PenjualanIndex(),
+    RiwayatPenjualan(),
   ];
 
   void _onItemTapped(int index) {
@@ -34,14 +35,14 @@ class _BerandaState extends State<Beranda> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple[200],
+        backgroundColor: Colors.lightBlueAccent,
         title: const Text('Halaman Utama'),
       ),
       drawer: Drawer(
         child: ListView(
           children: [
             const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.purple),
+              decoration: BoxDecoration(color: Colors.lightBlueAccent),
               child: Center(
                 child: Text('Beranda'),
               ),
@@ -77,7 +78,7 @@ class _BerandaState extends State<Beranda> {
           BottomNavigationBarItem(icon: Icon(Icons.assignment), label: "Detail"),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.purple[700],
+        selectedItemColor: Colors.blue[900],
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),

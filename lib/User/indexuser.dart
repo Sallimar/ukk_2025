@@ -34,8 +34,11 @@ class _UserIndexState extends State<UserIndex> {
   @override 
   Widget build (BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 146, 212, 248),
       appBar: AppBar(
-        title: Text('Daftar User'),),
+        title: Text('Daftar User'),
+        backgroundColor: Color.fromARGB(255, 146, 212, 248),
+        ),
       body: ListView.builder(
         itemCount: user.length,
         itemBuilder: (context, index) {
@@ -55,11 +58,11 @@ class _UserIndexState extends State<UserIndex> {
                     ),
                   ),
                   ), 
-                  icon: Icon(Icons.edit),
+                  icon: Icon(Icons.edit, color: Colors.blueAccent,),
                 ),
                 IconButton(
                   onPressed: () => deleteUser(userItem['id']), 
-                  icon: Icon(Icons.delete)
+                  icon: Icon(Icons.delete, color: Colors.redAccent,)
                 )
               ],
             ),
@@ -67,7 +70,7 @@ class _UserIndexState extends State<UserIndex> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, color: Colors.lightBlue,),
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context)=> Insertuser(refreshUsers: fetchUsers)),

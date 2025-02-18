@@ -71,19 +71,22 @@ class _LoginState extends State<Login> {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[100],
+      backgroundColor: const Color.fromARGB(255, 146, 209, 238),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text('Silahkan Login Terlebih Dahulu', 
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black)),
+              const SizedBox( height: 40),
               TextField(
                 controller: usernameController,
                 decoration: const InputDecoration(
                   hintText: "Username",
                   prefixIcon: Icon(Icons.person),
-                  hintStyle: TextStyle(color: Colors.black),
+                  hintStyle: TextStyle(color: Color.fromARGB(255, 6, 4, 4)),
                   border: OutlineInputBorder(),
                 ),
               ),

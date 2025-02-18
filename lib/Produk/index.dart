@@ -47,8 +47,11 @@ class _ProdukIndexState extends State<ProdukIndex> {
       .toList();
       
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 146, 212, 248),
       appBar: AppBar(
-        title: Text('Daftar Produk')),
+        title: const Text('Daftar Produk'),
+        backgroundColor: Color.fromARGB(255, 146, 212, 248),
+        ),
       body: Column(
         children: [
           Padding(
@@ -56,7 +59,7 @@ class _ProdukIndexState extends State<ProdukIndex> {
             child: TextField(
               decoration: InputDecoration(
                 labelText: 'Cari Produk...',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
               onChanged: (value) {
@@ -74,6 +77,7 @@ class _ProdukIndexState extends State<ProdukIndex> {
               itemBuilder: (context, index) {
                 final item = filteredProduk[index];
                 return Card(
+                  color: Color.fromARGB(255, 202, 189, 241),
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: ListTile(
                     title: Text(item['NamaProduk']),
@@ -90,10 +94,10 @@ class _ProdukIndexState extends State<ProdukIndex> {
                               )
                             )
                           ).then((_) => fetchProduk()),
-                          icon: Icon(Icons.edit)
+                          icon: Icon(Icons.edit, color: Colors.blueAccent,)
                         ),
                         IconButton( 
-                        icon: Icon(Icons.delete),
+                        icon: Icon(Icons.delete, color: Colors.redAccent,),
                         onPressed: () => deleteProduk(item['ProdukID']),
                         )
                       ],
@@ -117,7 +121,7 @@ class _ProdukIndexState extends State<ProdukIndex> {
             MaterialPageRoute(builder: (context)=>addproduk()),
           ).then((_)=> fetchProduk());
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, color: Colors.lightBlue,),
       ),
     );
   }
