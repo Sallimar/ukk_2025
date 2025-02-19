@@ -20,11 +20,9 @@ class _RiwayatPenjualanState extends State<RiwayatPenjualan> {
   Future<void> fetchRiwayat() async {
     try {
       final response = await supabase.from('penjualan').select();
-      print("Response dari Supabase: $response");
       setState(() {
         penjualan = List<Map<String, dynamic>>.from(response);
       });
-      print("Data penjualan yang di-set: $penjualan");
     } catch (e) {
       print(e) {
         print("Eror saat mengambil data: $e");
@@ -51,9 +49,9 @@ class _RiwayatPenjualanState extends State<RiwayatPenjualan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 146, 212, 248),
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
       appBar: AppBar(title: Text("Riwayat Penjualan"),
-      backgroundColor: Color.fromARGB(255, 146, 212, 248),
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
       ),
       body: penjualan.isEmpty
       ? Center(child: CircularProgressIndicator())
@@ -61,7 +59,9 @@ class _RiwayatPenjualanState extends State<RiwayatPenjualan> {
         itemCount: penjualan.length,
         itemBuilder: (context, index) {
           final item = penjualan[index];
-          return ListTile(
+          return Card(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            child: ListTile(
             title: Text('Penjualan ${item['PenjualanID']}'),
             subtitle: Text("Total: Rp ${item['TotalHarga']}"),
             onTap: () async {
@@ -74,6 +74,7 @@ class _RiwayatPenjualanState extends State<RiwayatPenjualan> {
               )
               );
             },
+          )
           );
         })
     );

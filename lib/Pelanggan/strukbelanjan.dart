@@ -21,9 +21,11 @@ class StrukPage extends StatelessWidget {
           return pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              pw.Text('Toko Mama Suka', style: pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
+              pw.Text('Toko Mama Suka', style: pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold),textAlign: pw.TextAlign.center),
               pw.SizedBox(height: 8),
-              pw.Text('Jl. Raya Kepanjen No.42, Penarukan', style: pw.TextStyle(fontSize: 16)),
+              pw.Text('Jl. Raya Kepanjen No.42, Penarukan', style: pw.TextStyle(fontSize: 16), textAlign: pw.TextAlign.center),
+              pw.SizedBox(height: 8),
+              pw.Text('Terima kasih telah datang di Toko Mama Suka \n kepuasan pelanggan adalah prioritas kami', style: pw.TextStyle(fontSize:14), textAlign: pw.TextAlign.center),
               pw.SizedBox(height: 16),
               pw.Divider(),
               pw.Text('Produk yang Dibeli', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
@@ -73,62 +75,68 @@ class StrukPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Struk Belanja'),
-      backgroundColor: Colors.green,
+      backgroundColor: const Color.fromARGB(255, 252, 216, 255),
+      appBar: AppBar(title: const Text('Struk Belanja'),
+      backgroundColor: const Color.fromARGB(255, 252, 216, 255),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Toko Mama Suka',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
+              style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold, color: Colors.black), textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               'Jalan Raya Kepanjen No.42 Penarukan',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              style: TextStyle(fontSize: 19, color: Colors.black), textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16),
-            Divider(),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
+              'Terima kasih telah datang di Toko Mama Suka \n kepuasan pelanggan adalah prioritas kami',
+              style: TextStyle(fontSize: 15, color: Colors.black, fontStyle: FontStyle.italic), textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            const Divider(),
+            const Text(
               'Produk Yang Dibeli',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Expanded(
               child: ListView(
                 shrinkWrap: true,
                 children: selectedProduk.map((item){
                   return ListTile(
-                    title: Text(item['NamaProduk']),
-                    subtitle: Text('Jumlah: ${item['JumlahProduk']}'),
-                    trailing: Text('Rp ${item['Harga'] * item['JumlahProduk']}'),
+                    title: Text(item['NamaProduk'], style: TextStyle(fontSize: 16),),
+                    subtitle: Text('Jumlah: ${item['JumlahProduk']}', style: TextStyle(color: Colors.black, fontSize: 16),),
+                    trailing: Text('Rp ${item['Harga'] * item['JumlahProduk']}', style: TextStyle(fontSize: 16),),
                   );
                 }).toList(),
               ),
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text('Total Harga', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              title: const Text('Total Harga', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               trailing: Text('Rp $totalHarga', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ),
-            Divider(),
-            Center(
+            const Divider(),
+            const Center(
               child: Text(
                 'Terima kasih atas kunjungan anda! \n barang yang sudah dibeli tidak bisa ditukar lagi....',
-                style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black54),
+                style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black),
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _generateAndDownloadPDF, 
-              child: Text('Unduh Stuk (PDF)'),
+              child: Text('Unduh Struk (PDF)'),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.purple[100]),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -138,7 +146,7 @@ class StrukPage extends StatelessWidget {
                 }, 
                 child: Text('Selesai'),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.purple[100]),
-                )
+            )
           ],
         ),
       ),

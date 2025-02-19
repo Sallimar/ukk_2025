@@ -68,13 +68,16 @@ class _DetailProdukState extends State<DetailProduk> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.produk['NamaProduk'])),
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
+      appBar: AppBar(title: Text(widget.produk['NamaProduk']),
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.produk['NamaProduk'], style: TextStyle(fontSize: 20)),
+            Text(widget.produk['NamaProduk'], style: TextStyle(fontSize: 20,), textAlign: TextAlign.center,),
             SizedBox(height: 10),
             Text("Harga: Rp ${widget.produk['Harga']}",style: TextStyle(fontSize: 18)),
             Text("Stok: ${widget.produk['Stok']}",style: TextStyle(fontSize: 18)),
@@ -84,14 +87,15 @@ class _DetailProdukState extends State<DetailProduk> {
               children: [
                 ElevatedButton(
                   onPressed: () => Navigator.pop(context), 
-                  child: Text("Kembali"),
+                  child: Text("Kembali", style: TextStyle(color: Colors.black),),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[200]),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=> PenjualanIndex()),);
                   }, 
-                  child: Text("Pesan"),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  child: Text("Pesan", style: TextStyle(color: Colors.black),),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[200]),
                 )
               ],
             )

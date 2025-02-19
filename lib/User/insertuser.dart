@@ -32,7 +32,7 @@ class _insertUserState extends State<Insertuser> {
 
     await supabase.from('user').insert({'username': username, 'password': password});
     widget.refreshUsers();
-    Navigator.pop(context);
+    Navigator.pop(0);
   }
 
   @override

@@ -75,8 +75,10 @@ class _addprodukState extends State<addproduk> {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
       appBar: AppBar(
         title: Text('Tambah Produk'),
+        backgroundColor: Color.fromARGB(255, 252, 216, 255),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

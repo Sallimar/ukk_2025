@@ -67,17 +67,13 @@ class _PenjualanIndexState extends State<PenjualanIndex> {
 
   Future<void> fetchProduk() async {
     try {
-      print("Mengambil data produk dari supabase...");
       final response = await supabase.from('produk').select();
-      print("Response dari Supabase: $response");
       if (response == null || response.isEmpty) {
         print("Tidak ada data produk di database");
       }
       setState(() {
         produk= List<Map<String, dynamic>>.from(response);
       });
-
-      print("data produk setelah si-set:$produk");
     } catch(e) {
       print("eror saat mengambil produk dari supabase: $e");
     }
@@ -107,9 +103,9 @@ class _PenjualanIndexState extends State<PenjualanIndex> {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 146, 212, 248),
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
       appBar: AppBar(title:const Text('Pilih Produk'),
-      backgroundColor: Color.fromARGB(255, 146, 212, 248),
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
       ),
       body: ListView.builder(
         itemCount: produk.length,
@@ -159,8 +155,10 @@ class _PenjualanIndexState extends State<PenjualanIndex> {
                               showDialog(
                                 context: context, 
                                 builder: (context) {
-                                  int selectedQty = 1;
-                                  return AlertDialog(title: Text('Masukkan Jumlah Produk'),
+                                  int selectedQty = 0;
+                                  return AlertDialog(
+                                    backgroundColor: Colors.blue[200],
+                                    title: Text('Masukkan Jumlah Produk'),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -180,11 +178,11 @@ class _PenjualanIndexState extends State<PenjualanIndex> {
                                         toggleSelection(item, true, quantity: selectedQty);
                                         Navigator.pop(context);
                                       }, 
-                                      child: Text('Konfirmasi'),
+                                      child: Text('Konfirmasi', style: TextStyle(color: Colors.redAccent, fontSize: 17, fontWeight: FontWeight.bold),),
                                     ),
                                     TextButton(
                                       onPressed: () => Navigator.pop(context), 
-                                      child: Text('Batal'),
+                                      child: Text('Batal', style: TextStyle(color: Colors.blueAccent, fontSize: 17, fontWeight: FontWeight.bold),),
                                     ),
                                   ],
                                   );
@@ -199,9 +197,9 @@ class _PenjualanIndexState extends State<PenjualanIndex> {
         onPressed: selectedProduk.isEmpty ? null : () async {
           await simpanTransaksi();
         }, 
-        label: Text('Lanjutkan'),
-        icon: Icon(Icons.shopping_cart),
-        backgroundColor: selectedProduk.isEmpty ? Colors.grey : Colors.green,
+        label: Text('Lanjutkan', style: TextStyle(color: Colors.white),),
+        icon: Icon(Icons.shopping_cart, color: Colors.white,),
+        backgroundColor: selectedProduk.isEmpty ? Colors.grey : const Color.fromARGB(255, 216, 6, 2),
         ),
     );
   }

@@ -38,7 +38,10 @@ class _InsertPenjualanState extends State<InsertPenjualan> {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Tambah Penjualan')),
+      backgroundColor: Colors.pink[300],
+      appBar: AppBar(title: Text('Tambah Penjualan'),
+      backgroundColor: Colors.pink[300],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

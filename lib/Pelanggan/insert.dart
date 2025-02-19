@@ -38,7 +38,10 @@ class _InsertPelangganState extends State<InsertPelanggan> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            appBar: AppBar(title: Text('Tambah Pelanggan')),
+          backgroundColor: Color.fromARGB(255, 252, 216, 255),
+            appBar: AppBar(title: Text('Tambah Pelanggan'),
+            backgroundColor: Color.fromARGB(255, 252, 216, 255),
+            ),
             body: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(

@@ -44,10 +44,10 @@ class _UpdateUserState extends State<Updateuser> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(controller: usernameController, decoration: InputDecoration(labelText: 'Username')),
-             TextField(controller: passwordController, decoration: InputDecoration(labelText: 'Password'), obscureText: true,),
-             SizedBox(height: 10,),
-             ElevatedButton(onPressed: Updateuser, child: Text('Update')),
+            TextField(controller: usernameController, decoration: const InputDecoration( labelText: 'Username')),
+             TextField(controller: passwordController, decoration: const InputDecoration(labelText: 'Password'), obscureText: true,),
+            const SizedBox(height: 10,),
+             ElevatedButton(onPressed: Updateuser, child:const Text('Update')),
           ],
         ),
         ),

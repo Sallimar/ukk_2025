@@ -47,9 +47,9 @@ class _PelangganIndexState extends State<PelangganIndex> {
 @override
 Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor: Color.fromARGB(255, 146, 212, 248),
+    backgroundColor: Color.fromARGB(255, 252, 216, 255),
     appBar: AppBar(title: Text('Daftar Pelanggan'),
-    backgroundColor: Color.fromARGB(255, 146, 212, 248),
+    backgroundColor: const Color.fromARGB(255, 252, 216, 255),
     ),
     body: Column(
       children: [
@@ -57,10 +57,10 @@ Widget build(BuildContext context) {
           padding: const EdgeInsets.all(8.0),
           child: TextField(
             controller: searchController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Cari Pelanggan',
-              border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.search),
+              border: const OutlineInputBorder(),
+              prefixIcon: Icon(Icons.search, color: Colors.black),
             ),
             onChanged: filterPelanggan,
           ),
@@ -70,9 +70,11 @@ Widget build(BuildContext context) {
             itemCount: filteredPelanggan.length,
             itemBuilder: (context, index) {
               final item = filteredPelanggan[index];
-              return ListTile(
-                title: Text(item['NamaPelanggan']),
-                subtitle: Text('Alamat: ${item['Alamat']} | Telepon: ${item['NomorTelepon']}'),
+              return Card(
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: ListTile(
+                title: Text(item['NamaPelanggan'], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),),
+                subtitle: Text('Alamat: ${item['Alamat']} | Telepon: ${item['NomorTelepon']}',style: TextStyle(fontSize: 16, color: Colors.black) ,),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -93,6 +95,7 @@ Widget build(BuildContext context) {
                     )
                    ],
                   ),
+                )
                  );
                 }
                )
@@ -100,7 +103,7 @@ Widget build(BuildContext context) {
              ],
             ),
             floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.add, color: Colors.lightBlue),
+              child: Icon(Icons.add, color: Colors.black),
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context)=> InsertPelanggan(refreshPelanggan: fetchPelanggan),

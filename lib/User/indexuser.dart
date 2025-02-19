@@ -34,18 +34,21 @@ class _UserIndexState extends State<UserIndex> {
   @override 
   Widget build (BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 146, 212, 248),
+      backgroundColor:const Color.fromARGB(255, 252, 216, 255),
       appBar: AppBar(
-        title: Text('Daftar User'),
-        backgroundColor: Color.fromARGB(255, 146, 212, 248),
+        title: const Text('Daftar User'),
+        backgroundColor: const Color.fromARGB(255, 252, 216, 255),
         ),
       body: ListView.builder(
         itemCount: user.length,
         itemBuilder: (context, index) {
           final userItem = user[index];
-          return ListTile(
+          return Card(
+            color: const Color.fromARGB(255, 202, 189, 241),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: ListTile(
             title: Text(userItem['username']),
-            subtitle: Text('******'),
+            subtitle: const Text('******'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -58,19 +61,20 @@ class _UserIndexState extends State<UserIndex> {
                     ),
                   ),
                   ), 
-                  icon: Icon(Icons.edit, color: Colors.blueAccent,),
+                  icon: const Icon(Icons.edit, color: Colors.blueAccent,),
                 ),
                 IconButton(
                   onPressed: () => deleteUser(userItem['id']), 
-                  icon: Icon(Icons.delete, color: Colors.redAccent,)
+                  icon: const Icon(Icons.delete, color: Colors.redAccent,)
                 )
               ],
             ),
+            )
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, color: Colors.lightBlue,),
+        child: const Icon(Icons.add, color: Colors.black),
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context)=> Insertuser(refreshUsers: fetchUsers)),

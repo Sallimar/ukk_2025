@@ -47,10 +47,10 @@ class _ProdukIndexState extends State<ProdukIndex> {
       .toList();
       
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 146, 212, 248),
+      backgroundColor: Color.fromARGB(255, 252, 216, 255),
       appBar: AppBar(
         title: const Text('Daftar Produk'),
-        backgroundColor: Color.fromARGB(255, 146, 212, 248),
+        backgroundColor: Color.fromARGB(255, 252, 216, 255),
         ),
       body: Column(
         children: [
@@ -59,7 +59,7 @@ class _ProdukIndexState extends State<ProdukIndex> {
             child: TextField(
               decoration: InputDecoration(
                 labelText: 'Cari Produk...',
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search, color: Colors.black,),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
               onChanged: (value) {
@@ -77,11 +77,10 @@ class _ProdukIndexState extends State<ProdukIndex> {
               itemBuilder: (context, index) {
                 final item = filteredProduk[index];
                 return Card(
-                  color: Color.fromARGB(255, 202, 189, 241),
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: ListTile(
-                    title: Text(item['NamaProduk']),
-                    subtitle: Text('Harga: ${item['Harga']} | Stok: ${item['Stok']}'),
+                    title: Text(item['NamaProduk'], style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
+                    subtitle: Text('Harga: ${item['Harga']} | Stok: ${item['Stok']}', style: TextStyle(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.bold),),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -121,7 +120,7 @@ class _ProdukIndexState extends State<ProdukIndex> {
             MaterialPageRoute(builder: (context)=>addproduk()),
           ).then((_)=> fetchProduk());
         },
-        child: Icon(Icons.add, color: Colors.lightBlue,),
+        child: Icon(Icons.add, color: Colors.black),
       ),
     );
   }

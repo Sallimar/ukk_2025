@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 146, 209, 238),
+      backgroundColor: const Color.fromARGB(255, 252, 216, 255),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -85,8 +85,8 @@ class _LoginState extends State<Login> {
                 controller: usernameController,
                 decoration: const InputDecoration(
                   hintText: "Username",
-                  prefixIcon: Icon(Icons.person),
-                  hintStyle: TextStyle(color: Color.fromARGB(255, 6, 4, 4)),
+                  hintStyle: TextStyle(color: Colors.black),
+                  prefixIcon: Icon(Icons.person, color: Colors.black,),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -96,9 +96,9 @@ class _LoginState extends State<Login> {
                 obscureText: !_isPasswordVisible,
                 decoration: InputDecoration(
                   hintText: "password",
-                  prefixIcon: const Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock, color: Colors.black,),
                   suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                    icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off, color: Colors.black,),
                     onPressed: () {
                       setState(() {
                         _isPasswordVisible = !_isPasswordVisible;
@@ -112,7 +112,7 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 20,),
               ElevatedButton(
                 onPressed: _login, 
-                child: const Text('Login'),
+                child: const Text('Login', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
               )
             ],
           ),

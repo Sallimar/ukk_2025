@@ -35,14 +35,14 @@ class _BerandaState extends State<Beranda> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor:const Color.fromARGB(255, 252, 216, 255),
         title: const Text('Halaman Utama'),
       ),
       drawer: Drawer(
         child: ListView(
           children: [
             const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.lightBlueAccent),
+              decoration: BoxDecoration(color: Color.fromARGB(255, 252, 216, 255),),
               child: Center(
                 child: Text('Beranda'),
               ),
@@ -61,7 +61,7 @@ class _BerandaState extends State<Beranda> {
                 title: const Text('Logout'),
                 onTap: () {
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context)=>MyHomePage()),
+                    context, MaterialPageRoute(builder: (context)=>const MyHomePage()),
                   );
                 },
             ),
@@ -78,7 +78,7 @@ class _BerandaState extends State<Beranda> {
           BottomNavigationBarItem(icon: Icon(Icons.assignment), label: "Detail"),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue[900],
+        selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),

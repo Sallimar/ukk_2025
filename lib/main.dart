@@ -37,15 +37,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 134, 228, 249),
+        backgroundColor: const Color.fromARGB(255, 252, 216, 255),
         leading: IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()),);
+            Navigator.push(context, 
+            MaterialPageRoute(builder: (context)=> Login()),);
           }, 
           icon: Icon(Icons.login_outlined)),
       ),
       body: Container(
-        color: const Color.fromARGB(255, 134, 228, 249),
+        color: const Color.fromARGB(255, 252, 216, 255),
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [ Center(
@@ -58,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
              color: Colors.black,
            ),
           textAlign: TextAlign.center,
-          )
-         ) 
+          ),
+         ),
         ],
       ),
     ), 
